@@ -77,7 +77,6 @@ routes/              // Express routes
 utils/               // DB connection, validators
 test/                // Jest tests
 index.js             // App bootstrap
-jest.config.js       // Jest configuration
 ```
 
 ### Notes
