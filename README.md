@@ -1,6 +1,6 @@
-## Inventory Management (Node.js + Express + Mongoose)
+## Inventory Management (Node.js + Express + MongoDB)
 
-A minimal inventory service with products CRUD and stock safeguards, built with Express, Mongoose, and express-validator.
+A minimal inventory service with products CRUD and stock safeguards, built with Express, MongoDB, and express-validator.
 
 ### Quick setup
 
