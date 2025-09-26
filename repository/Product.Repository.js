@@ -20,4 +20,10 @@ const deletProductById = async(id) => {
     return await ProductModel.findByIdAndDelete(id);
 }
 
-export {createProductModel, getProductFromId, deletProductById}
+const updateProductById = async(id, updatedQuantity) => {
+
+    return await ProductModel.findByIdAndUpdate(id, {quantity:updatedQuantity}, {new: true});
+
+}
+
+export {createProductModel, getProductFromId, deletProductById, updateProductById}

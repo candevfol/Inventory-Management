@@ -6,8 +6,10 @@ const createProductValidator = [
     body('quantity').isInt().withMessage(`Product quantity in Number is expected`)
 ]
 
+const updateProductValidator = body('change').isInt().withMessage(`Change should be provided in Number to update Product quantity`);
+
 
 export {
-    createProductValidator
+    createProductValidator, updateProductValidator
 }
 
