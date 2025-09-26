@@ -1,5 +1,5 @@
 import { validationResult } from "express-validator"
-import { createProductModel, deletProductById, getProductFromId, updateProductById } from "../repository/Product.Repository.js"
+import { createProductModel, deletProductById, getAllProductsBelowThreshold, getProductFromId, updateProductById } from "../repository/Product.Repository.js"
 
 const createProduct = async (req, res, next) => {
     try{
@@ -9,9 +9,9 @@ const createProduct = async (req, res, next) => {
                 message: valResult.errors[0].msg
             })
         }
-        const {name, description, quantity} = req.body
+        const {name, description, quantity, threshold} = req.body;
 
-        const createdProduct = await createProductModel(name, description, quantity);
+        const createdProduct = await createProductModel(name, description, quantity, threshold);
         if(!createdProduct){
             return res.status(400).json({
                 message: "Something went wrong while creating creating product.Please try again"
@@ -95,4 +95,14 @@ const updateProduct = async(req, res, next) => {
     }
 }
 
-export {createProduct, getProduct, deletProduct, updateProduct}
+const getBelowThreshold = async(req, res, next) => {
+    try{
+        const products = await getAllProductsBelowThreshold();
+        return res.status(200).json({"status":"success", data: products})
+    }
+    catch(err){
+        next(err)
+    }
+}
+
+export {createProduct, getProduct, deletProduct, updateProduct, getBelowThreshold}

@@ -1,9 +1,15 @@
 import mongoose from "mongoose";
 import ProductModel from "../model/Product.model.js"
 
-const createProductModel = async (name, description, quantity) => {
-        const productCreated = await ProductModel.create({name,description,quantity})
-        return productCreated;
+const createProductModel = async (name, description, quantity, threshold) => {
+    const productData = { name, description, quantity };
+
+    if (threshold !== undefined && threshold !== null && threshold !== '') {
+        productData.threshold = threshold;
+    }
+
+    const productCreated = await ProductModel.create(productData);
+    return productCreated;
 }
 
 const getProductFromId = async (id) => {
@@ -26,4 +32,12 @@ const updateProductById = async(id, updatedQuantity) => {
 
 }
 
-export {createProductModel, getProductFromId, deletProductById, updateProductById}
+const getAllProductsBelowThreshold = async() => {
+
+    const products = await ProductModel.find({
+        $expr: { $lt: ["$quantity", "$threshold"] }
+      });
+      return products;
+}
+
+export {createProductModel, getProductFromId, deletProductById, updateProductById, getAllProductsBelowThreshold}

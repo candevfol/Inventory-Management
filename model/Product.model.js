@@ -12,6 +12,9 @@ const Product = Schema({
     quantity: {
         type: Number,
         required: true
+    },
+    threshold: {
+        type: Number,
     }
 });
 
